@@ -5,12 +5,18 @@
 .DESCRIPTION
    Group Policy Objects have been created, managed, configured, re-configured, deleted,
    backed up, imported, exported, inspected, detected, neglected and rejected for many years. 
-   Now with the advent of Desired State Configuration (DSC) ensuring that the work previously 
-   done, with regards to configuring registry policy, is not lost. ConvertTo-DSC is a cmdlet 
-   (advanced function) that was created to address this sceanario. The ConvertTo-DSC cmdlet
-   requires the GroupPolicy PowerShell Module. The GP cmdlets are avaialbe on machines where 
-   the GPMC is installed. The <gponame>.ps1 file will be opened in the PowerShell ISE as a
-   convenience.
+   Now with the advent of Desired State Configuration (DSC) ensuring that the work with regards 
+   to configuring registry policy, is not lost. ConvertTo-DSC is a cmdlet (advanced function) 
+   that was created to address this sceanario. The ConvertTo-DSC cmdlet requires the GroupPolicy 
+   PowerShell Module. The GP cmdlets are avaialbe on machines where the GPMC is installed. 
+   The <gponame>.ps1 file will be opened in the PowerShell ISE as a convenience.
+.PARAMETER GPOName
+    The parameter GPOName is the displayname of the Group Policy Object to be referenced for
+    the operation. The 'GPOName' parameter is aliased as 'GPO' for convenience and to conform
+    to other GP cmdlets.
+.PARAMETER OutputPath
+    The 'OutputPath' parameter points to the directory where the DSC document will be created. 
+    This parameter is aliased as 'Path' for convenience and to conform to other cmdlets.
 .EXAMPLE
    ConvertTo-DSC -GPOName <gpo> -OutputFolder <folder where to create DSC .ps1 file>
 .EXAMPLE
@@ -32,9 +38,13 @@ function ConvertTo-DSC
     Param
     # possibly re-work parameter names.
         ([Parameter(Mandatory=$true)]
+        [Alias("GPO")]
         [string]$GPOName,
+        
         [Parameter(Mandatory=$true)]
+        [Alias("Path")]
         [string] $OutputFolder
+        
     )
 
     Process
